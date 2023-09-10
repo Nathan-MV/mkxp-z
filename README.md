@@ -1,3 +1,13 @@
+# mkxp-z-eulogy
+
+<p align="center"><b>
+  <a href="https://github.com/Eblo/mkxp-z-eulogy/actions/workflows/autobuild.yml">Automatic Builds</a>
+</b></p>
+
+This is a fork of <a href="https://github.com/mkxp-z/mkxp-z">mkxp-z</a> with changes specific to Eulogy of an Insect. This is not intended to be a replacement for the mkxp project itself and will probably not work for other games out of the box.
+
+The original README for mkxp-z is as follows:
+
 # mkxp-z
 
 <p align="center"><b>
