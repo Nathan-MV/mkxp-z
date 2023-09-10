@@ -8,7 +8,7 @@
 
 I don't like the idea of doing straight "releases" anymore, since mkxp-z was never something I considered 'stable' to begin with, and the way I have to do things usually means I don't get to have things stress-tested until a build has already been posted and I eventually find out something is wrong. Automated builds are retained for 60 days and require logging in to access. Past that, you're probably on your own (though I've tried to make sure that building mkxp-z yourself is [as easy as possible](https://github.com/mkxp-z/mkxp-z/wiki/Compilation))
 
-I'm usually *very* slow with responding to things on Github, so if you have something you want to say and you want a faster response, you're probably better off asking in [Ancurio's Discord server](https://discord.gg/b2qg8QbV). I don't have my own.
+I'm usually *very* slow with responding to things on Github, so if you have something you want to say and you want a faster response, you're probably better off asking in [Ancurio's Discord server](https://discord.gg/A8xHE8P). I don't have my own.
 The place is basically a ghost town haunted by myself and a few others, so expect me to pipe up if no one else does. I do not currently frequent anyplace else that you might care about.
 
 I wouldn't expect too much activity from me from now on. I'm basically quitting, but I'm still willing to answer questions, take pull requests, that kind of thing. I'm still willing to hunt down bugs, but given the vast majority of my past troubleshooting came from trying to search through forum threads and snooping through Discord logs, chances are that if it's not something that I just broke, it's probably not a thing that I have the resources or help to fix. I'm not doing second-hand customer service anymore.
@@ -54,3 +54,10 @@ If a requested font is not found, no error is generated. Instead, a built-in fon
 * wma audio files
 * Creating Bitmaps with sizes greater than your hardware's texture size limit (around 16384 on modern cards).
   * There is an exception to this, called *mega surface*. When a Bitmap bigger than the texture limit is created from a file, it is not stored in VRAM, but regular RAM. Its sole purpose is to be used as a tileset bitmap. Any other operation to it (besides blitting to a regular Bitmap) will result in an error.
+ 
+## Notable Thanks
+
++ Ancurio, who wrote mkxp in the first place
++ Savordez and Aeodyn for making stuff work on Windows
++ Eblo for the `Graphics.play_movie` implementation
++ basically anyone else with commits in here or that reported problems to me
