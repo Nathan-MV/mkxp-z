@@ -294,7 +294,7 @@ typedef struct {
     const char *filename;
     int volume;
     bool skippable;
-    VALUE shaderArr;
+    void *shaderArr;
 } PlayMovieArgs;
 
 void *playMovieInternal(void *args) {
@@ -327,7 +327,7 @@ RB_METHOD(graphicsPlayMovie)
     args.filename = RSTRING_PTR(filename);
     args.volume = (volumeArg == Qnil) ? 100 : NUM2INT(volumeArg);
     args.skippable = skip;
-    args.shaderArr = shaderArr;
+    args.shaderArr = (shaderArr == Qnil) ? 0 : &shaderArr;
 #if RAPI_MAJOR >= 2
     rb_thread_call_without_gvl(playMovieInternal, &args, 0, 0);
 #else

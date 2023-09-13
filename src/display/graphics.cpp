@@ -1503,7 +1503,7 @@ bool Graphics::updateMovieInput(Movie *movie) {
     return  p->threadData->rqTerm || p->threadData->rqReset;
 }
 
-void Graphics::playMovie(const char *filename, int volume_, bool skippable, VALUE shaderArr) {
+void Graphics::playMovie(const char *filename, int volume_, bool skippable, void *shaderArr) {
     Movie *movie = new Movie(skippable);
     MovieOpenHandler handler(movie->srcOps);
     shState->fileSystem().openRead(handler, filename);
@@ -1514,7 +1514,8 @@ void Graphics::playMovie(const char *filename, int volume_, bool skippable, VALU
 
         // Currently this stretches to fit the screen. VX Ace behavior is to center it and let the edges run off
         movieSprite.setBitmap(movie->videoBitmap);
-        if(shaderArr != Qnil) movieSprite.setShaderArr(shaderArr);
+        // Pass around void* because trying to include in graphics.h to have access to VALUE is a compilation nightmare
+        if(shaderArr != 0) movieSprite.setShaderArr(*reinterpret_cast<VALUE*>(shaderArr));
 
         double ratio = std::min((double)width() / movie->video->width, (double)height() / movie->video->height);
         movieSprite.setZoomX(ratio);
