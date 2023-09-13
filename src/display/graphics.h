@@ -23,6 +23,7 @@
 #define GRAPHICS_H
 
 #include "util.h"
+#include "rb_shader.h"
 
 class Scene;
 class Bitmap;
@@ -64,7 +65,7 @@ public:
     void resizeWindow(int width, int height, bool center=false);
 	void drawMovieFrame(const THEORAPLAY_VideoFrame* video, Bitmap *videoBitmap);
 	bool updateMovieInput(Movie *movie);
-	void playMovie(const char *filename, int volume, bool skippable);
+	void playMovie(const char *filename, int volume, bool skippable, VALUE shaderArr);
 	void screenshot(const char *filename);
 
 	void reset();

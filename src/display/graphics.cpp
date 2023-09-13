@@ -19,12 +19,6 @@
  ** along with mkxp.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*
-	For whatever reason, the includes in this file result in a Ruby 3.0.0 build error if this is not defined.
-	See ruby/missing.h for this check.
-*/
-# define HAVE_ISFINITE 1
-
 #include "graphics.h"
 
 #include "alstream.h"
@@ -70,7 +64,6 @@
 #include <cmath>
 #include <climits>
 
-#include "rb_shader.h"
 #include "binding-types.h"
 
 
@@ -1510,17 +1503,19 @@ bool Graphics::updateMovieInput(Movie *movie) {
     return  p->threadData->rqTerm || p->threadData->rqReset;
 }
 
-void Graphics::playMovie(const char *filename, int volume_, bool skippable) {
+void Graphics::playMovie(const char *filename, int volume_, bool skippable, VALUE shaderArr) {
     Movie *movie = new Movie(skippable);
     MovieOpenHandler handler(movie->srcOps);
     shState->fileSystem().openRead(handler, filename);
     float volume = volume_ * 0.01f;
     
-    if (movie->preparePlayback()) {        
+    if (movie->preparePlayback()) {
         Sprite movieSprite;
-        
+
         // Currently this stretches to fit the screen. VX Ace behavior is to center it and let the edges run off
         movieSprite.setBitmap(movie->videoBitmap);
+        if(shaderArr != Qnil) movieSprite.setShaderArr(shaderArr);
+
         double ratio = std::min((double)width() / movie->video->width, (double)height() / movie->video->height);
         movieSprite.setZoomX(ratio);
         movieSprite.setZoomY(ratio);
