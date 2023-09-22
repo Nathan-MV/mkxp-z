@@ -1086,8 +1086,6 @@ void Bitmap::blur()
     FloatRect rect(0, 0, width(), height());
     quad.setTexPosRect(rect, rect);
     
-    TEXFBO auxTex = shState->texPool().request(width(), height());
-    
     BlurShader &shader = shState->shaders().blur;
     BlurShader::HPass &pass1 = shader.pass1;
     BlurShader::VPass &pass2 = shader.pass2;
@@ -1096,7 +1094,7 @@ void Bitmap::blur()
     glState.viewport.pushSet(IntRect(0, 0, width(), height()));
     
     TEX::bind(p->gl.tex);
-    FBO::bind(auxTex.fbo);
+    FBO::bind(p->frontBuffer.fbo);
     
     pass1.bind();
     pass1.setTexSize(Vec2i(width(), height()));
@@ -1104,7 +1102,7 @@ void Bitmap::blur()
     
     quad.draw();
     
-    TEX::bind(auxTex.tex);
+    TEX::bind(p->frontBuffer.tex);
     p->bindFBO();
     
     pass2.bind();
@@ -1115,8 +1113,6 @@ void Bitmap::blur()
     
     glState.viewport.pop();
     glState.blend.pop();
-    
-    shState->texPool().release(auxTex);
     
     p->onModified();
 }
@@ -1176,9 +1172,7 @@ void Bitmap::radialBlur(int angle, int divisions)
     
     qArray.commit();
     
-    TEXFBO newTex = shState->texPool().request(_width, _height);
-    
-    FBO::bind(newTex.fbo);
+    FBO::bind(p->frontBuffer.fbo);
     
     glState.clearColor.pushSet(Vec4());
     FBO::clear();
@@ -1211,8 +1205,7 @@ void Bitmap::radialBlur(int angle, int divisions)
     glState.blendMode.pop();
     glState.clearColor.pop();
     
-    shState->texPool().release(p->gl);
-    p->gl = newTex;
+    std::swap(p->gl, p->frontBuffer);
     
     p->onModified();
 }
@@ -1229,8 +1222,8 @@ void Bitmap::shade(CustomShader *shader) {
 	glState.blend.pushSet(false);
 	glState.viewport.pushSet(IntRect(0, 0, width(), height()));
 
-	TEX::bind(p->gl.tex);
-	p->bindFBO();
+    TEX::bind(p->gl.tex);
+    FBO::bind(p->frontBuffer.fbo);
 
 	CompiledShader* compiled = shader->getShader();
 
@@ -1241,6 +1234,7 @@ void Bitmap::shade(CustomShader *shader) {
 
 	quad.draw();
 
+    std::swap(p->gl, p->frontBuffer);
 	glState.viewport.pop();
 	glState.blend.pop();
 
@@ -1441,8 +1435,6 @@ void Bitmap::hueChange(int hue)
     if ((hue % 360) == 0)
         return;
     
-    TEXFBO newTex = shState->texPool().request(width(), height());
-    
     FloatRect texRect(rect());
     
     Quad &quad = shState->gpQuad();
@@ -1454,7 +1446,7 @@ void Bitmap::hueChange(int hue)
     /* Shader expects normalized value */
     shader.setHueAdjust(wrapRange(hue, 0, 359) / 360.0f);
     
-    FBO::bind(newTex.fbo);
+    FBO::bind(p->frontBuffer.fbo);
     p->pushSetViewport(shader);
     p->bindTexture(shader);
     
@@ -1464,8 +1456,7 @@ void Bitmap::hueChange(int hue)
     
     TEX::unbind();
     
-    shState->texPool().release(p->gl);
-    p->gl = newTex;
+    std::swap(p->gl, p->frontBuffer);
     
     p->onModified();
 }
