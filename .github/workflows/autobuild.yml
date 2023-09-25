@@ -133,6 +133,9 @@ jobs:
           cp ../../mkxp.json .
           cp -r ../../scripts .
           cp ../../assets/LICENSE.mkxp-z-with-https.txt .
+          cp ../../vendor/ANGLE/libGLESv2.so ./lib64
+          cp ../../vendor/ANGLE/libEGL.so.1 ./lib64
+          cp ../../vendor/ANGLE/libvulkan.so.1 ./lib64
           cd ..
           zip -r local.zip local
 
