@@ -152,16 +152,14 @@ void Config::read(int argc, char *argv[]) {
         {"syncToRefreshrate", false},
         {"solidFonts", json::array({})},
 #if defined(__APPLE__) && defined(__aarch64__)
-        {"preferMetalRenderer", true},
+        {"angleRenderer", "metal"},
+#elif __WIN32__
+        {"angleRenderer", "opengl"},
 #else
-        {"preferMetalRenderer", false},
+        {"angleRenderer", "vulkan"},
 #endif
         {"subImageFix", false},
-#ifdef __WIN32__
         {"enableBlitting", false},
-#else
-        {"enableBlitting", true},
-#endif
         {"integerScalingActive", false},
         {"integerScalingLastMile", true},
         {"maxTextureSize", 0},
@@ -290,9 +288,7 @@ try { exp } catch (...) {}
     for (std::string & solidFont : solidFonts)
         std::transform(solidFont.begin(), solidFont.end(), solidFont.begin(),
             [](unsigned char c) { return std::tolower(c); });
-#ifdef __APPLE__
-    SET_OPT(preferMetalRenderer, boolean);
-#endif
+    SET_STRINGOPT(angleRenderer, angleRenderer);
     SET_OPT(subImageFix, boolean);
     SET_OPT(enableBlitting, boolean);
     SET_OPT_CUSTOMKEY(integerScaling.active, integerScalingActive, boolean);
@@ -342,7 +338,7 @@ try { exp } catch (...) {}
 #ifdef __APPLE__
     // Determine whether to use the Metal renderer on macOS
     // Environment variable takes priority over the json setting
-    preferMetalRenderer = isMetalSupported() && getEnvironmentBool("MKXPZ_MACOS_METAL", preferMetalRenderer);
+    angleRenderer = isMetalSupported() ? "metal" : "opengl";
 #endif
     
     // Determine whether to allow manual selection of a game folder on startup
