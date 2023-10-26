@@ -14,8 +14,8 @@ BINDIR := $(BUILD_PREFIX)/bin
 INCLUDEDIR := $(BUILD_PREFIX)/include
 DOWNLOADS := ${PWD}/downloads/$(ARCH)
 NPROC := $(shell nproc)
-CFLAGS := -I$(INCLUDEDIR) -O3
-LDFLAGS := -L$(LIBDIR)
+CFLAGS := -I$(INCLUDEDIR) -Ofast
+LDFLAGS := -L$(LIBDIR) -Wl,-Ofast,-flto=full
 CC      := gcc
 PKG_CONFIG_LIBDIR := $(BUILD_PREFIX)/lib/pkgconfig
 GIT := git
