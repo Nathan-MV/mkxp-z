@@ -148,16 +148,14 @@ void Config::read(int argc, char *argv[]) {
         {"syncToRefreshrate", false},
         {"solidFonts", json::array({})},
 #if defined(__APPLE__) && defined(__aarch64__)
-        {"preferMetalRenderer", true},
+        {"angleRenderer", "metal"},
+#elif __WIN32__
+        {"angleRenderer", "opengl"},
 #else
-        {"preferMetalRenderer", false},
+        {"angleRenderer", "vulkan"},
 #endif
         {"subImageFix", false},
-#ifdef __WIN32__
         {"enableBlitting", false},
-#else
-        {"enableBlitting", true},
-#endif
         {"integerScalingActive", false},
         {"integerScalingLastMile", true},
         {"maxTextureSize", 0},
@@ -196,7 +194,12 @@ void Config::read(int argc, char *argv[]) {
             {"z", "Z"},
             {"l", "L"},
             {"r", "R"}
-        })}
+        })},
+        {"metaFile", ""},
+        {"patchFile", ""},
+        {"password", ""},
+        {"keyMultiplier", 0},
+        {"keyAdditive", 0}
     });
     
     auto &opts = optsJ.as_object();
@@ -277,9 +280,7 @@ try { exp } catch (...) {}
     for (std::string & solidFont : solidFonts)
         std::transform(solidFont.begin(), solidFont.end(), solidFont.begin(),
             [](unsigned char c) { return std::tolower(c); });
-#ifdef __APPLE__
-    SET_OPT(preferMetalRenderer, boolean);
-#endif
+    SET_STRINGOPT(angleRenderer, angleRenderer);
     SET_OPT(subImageFix, boolean);
     SET_OPT(enableBlitting, boolean);
     SET_OPT_CUSTOMKEY(integerScaling.active, integerScalingActive, boolean);
@@ -295,6 +296,11 @@ try { exp } catch (...) {}
     SET_OPT_CUSTOMKEY(BGM.trackCount, BGMTrackCount, integer);
     SET_STRINGOPT(customScript, customScript);
     SET_OPT(useScriptNames, boolean);
+    SET_STRINGOPT(encryption.metaFile, metaFile);
+    SET_STRINGOPT(encryption.patchFile, patchFile);
+    SET_STRINGOPT(encryption.password, password);
+    SET_OPT_CUSTOMKEY(encryption.keyMultiplier, keyMultiplier, integer);
+    SET_OPT_CUSTOMKEY(encryption.keyAdditive, keyAdditive, integer);
     
     fillStringVec(opts["preloadScript"], preloadScripts);
     fillStringVec(opts["RTP"], rtps);
@@ -326,7 +332,7 @@ try { exp } catch (...) {}
 #ifdef __APPLE__
     // Determine whether to use the Metal renderer on macOS
     // Environment variable takes priority over the json setting
-    preferMetalRenderer = isMetalSupported() && getEnvironmentBool("MKXPZ_MACOS_METAL", preferMetalRenderer);
+    angleRenderer = isMetalSupported() ? "metal" : "opengl";
 #endif
     
     // Determine whether to allow manual selection of a game folder on startup
@@ -339,11 +345,11 @@ try { exp } catch (...) {}
 }
 
 static void setupScreenSize(Config &conf) {
-    if (conf.defScreenW <= 0)
-        conf.defScreenW = (conf.rgssVersion == 1 ? 640 : 544);
-    
-    if (conf.defScreenH <= 0)
-        conf.defScreenH = (conf.rgssVersion == 1 ? 480 : 416);
+  if (conf.defScreenW <= 0)
+    conf.defScreenW = 736;
+
+  if (conf.defScreenH <= 0)
+    conf.defScreenH = 416;
 }
 
 bool Config::fontIsSolid(const char *fontName) const {

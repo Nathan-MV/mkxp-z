@@ -27,6 +27,7 @@
 #include "sharedstate.h"
 #include "sprite.h"
 #include "viewportelement-binding.h"
+#include "shadable-element-binding.h"
 
 #if RAPI_FULL > 187
 DEF_TYPE(Sprite);
@@ -37,6 +38,8 @@ DEF_ALLOCFUNC(Sprite);
 RB_METHOD(spriteInitialize) {
     GFX_LOCK;
     Sprite *s = viewportElementInitialize<Sprite>(argc, argv, self);
+
+    shadableElementInitialize<Sprite>(self, s);
     
     setPrivateData(self, s);
     
@@ -72,6 +75,7 @@ DEF_GFX_PROP_I(Sprite, PatternScrollY)
 DEF_GFX_PROP_I(Sprite, WaveAmp)
 DEF_GFX_PROP_I(Sprite, WaveLength)
 DEF_GFX_PROP_I(Sprite, WaveSpeed)
+DEF_GFX_PROP_I(Sprite, BubbleElement)
 
 DEF_GFX_PROP_F(Sprite, ZoomX)
 DEF_GFX_PROP_F(Sprite, ZoomY)
@@ -81,8 +85,10 @@ DEF_GFX_PROP_F(Sprite, PatternZoomX)
 DEF_GFX_PROP_F(Sprite, PatternZoomY)
 
 DEF_GFX_PROP_B(Sprite, Mirror)
+DEF_GFX_PROP_B(Sprite, VMirror)
 DEF_GFX_PROP_B(Sprite, PatternTile)
 DEF_GFX_PROP_B(Sprite, Invert)
+DEF_GFX_PROP_B(Sprite, MirrorShader)
 
 RB_METHOD(spriteWidth) {
     RB_UNUSED_PARAM;
@@ -117,6 +123,7 @@ void spriteBindingInit() {
     disposableBindingInit<Sprite>(klass);
     flashableBindingInit<Sprite>(klass);
     viewportElementBindingInit<Sprite>(klass);
+	shadableElementBindingInit(klass);
     
     _rb_define_method(klass, "initialize", spriteInitialize);
     
@@ -130,6 +137,7 @@ void spriteBindingInit() {
     INIT_PROP_BIND(Sprite, ZoomY, "zoom_y");
     INIT_PROP_BIND(Sprite, Angle, "angle");
     INIT_PROP_BIND(Sprite, Mirror, "mirror");
+    INIT_PROP_BIND(Sprite, VMirror, "v_mirror");
     INIT_PROP_BIND(Sprite, BushDepth, "bush_depth");
     INIT_PROP_BIND(Sprite, Opacity, "opacity");
     INIT_PROP_BIND(Sprite, BlendType, "blend_type");
@@ -155,4 +163,7 @@ void spriteBindingInit() {
     INIT_PROP_BIND(Sprite, WaveLength, "wave_length");
     INIT_PROP_BIND(Sprite, WaveSpeed, "wave_speed");
     INIT_PROP_BIND(Sprite, WavePhase, "wave_phase");
+
+    INIT_PROP_BIND(Sprite, BubbleElement, "bubble_element");
+    INIT_PROP_BIND(Sprite, MirrorShader, "mirror_shader");
 }

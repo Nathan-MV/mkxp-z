@@ -36,8 +36,8 @@ struct Config {
     
     bool debugMode;
     bool winConsole;
-    bool preferMetalRenderer;
     bool displayFPS;
+    std::string angleRenderer;
     bool printFPS;
     
     bool winResizable;
@@ -154,6 +154,15 @@ struct Config {
     
     /* Internal */
     std::string customDataPath;
+    std::string commonDataPath;
+
+    struct {
+        std::string metaFile;
+        std::string patchFile;
+        std::string password;
+        int keyMultiplier;
+        int keyAdditive;
+    } encryption;
     
     Config();
     

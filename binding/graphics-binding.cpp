@@ -295,12 +295,13 @@ typedef struct {
     const char *filename;
     int volume;
     bool skippable;
+    void *shaderArr;
 } PlayMovieArgs;
 
 void *playMovieInternal(void *args) {
     PlayMovieArgs *a = (PlayMovieArgs*)args;
     GFX_GUARD_EXC(
-                  shState->graphics().playMovie(a->filename, a->volume, a->skippable);
+                  shState->graphics().playMovie(a->filename, a->volume, a->skippable, a->shaderArr);
                   
                   // Signals for shutdown or reset only make playMovie quit early,
                   // so check again
@@ -313,8 +314,9 @@ RB_METHOD(graphicsPlayMovie)
 {
     RB_UNUSED_PARAM;
     
-    VALUE filename, volumeArg, skippable;
-    rb_scan_args(argc, argv, "12", &filename, &volumeArg, &skippable);
+    VALUE filename, volumeArg, skippable, shaderArr;
+    rb_scan_args(argc, argv, "13", &filename, &volumeArg, &skippable, &shaderArr);
+
     SafeStringValue(filename);
     
     bool skip;
@@ -324,8 +326,9 @@ RB_METHOD(graphicsPlayMovie)
 
     PlayMovieArgs args{};
     args.filename = RSTRING_PTR(filename);
-    args.volume = (volumeArg == Qnil) ? 100 : NUM2INT(volumeArg);;
+    args.volume = (volumeArg == Qnil) ? 100 : NUM2INT(volumeArg);
     args.skippable = skip;
+    args.shaderArr = (shaderArr == Qnil) ? 0 : &shaderArr;
 #if RAPI_MAJOR >= 2
     rb_thread_call_without_gvl(playMovieInternal, &args, 0, 0);
 #else

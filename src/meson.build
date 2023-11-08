@@ -139,6 +139,7 @@ main_source = files(
     'display/font.cpp',
     'display/graphics.cpp',
     'display/plane.cpp',
+    'display/rb_shader.cpp',
     'display/sprite.cpp',
     'display/tilemap.cpp',
     'display/tilemapvx.cpp',
@@ -169,6 +170,8 @@ main_source = files(
 
     'filesystem/filesystem.cpp',
     'filesystem/filesystemImpl.cpp',
+
+    'fps/firstperson.cpp',
     
     'input/input.cpp',
     'input/keybindings.cpp',

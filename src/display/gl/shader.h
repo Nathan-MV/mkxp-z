@@ -88,12 +88,13 @@ public:
 
 	void setTexSize(const Vec2i &value);
 	void setTranslation(const Vec2i &value);
+	void setSpriteMat(const float value[16]);
 
 protected:
 	void init();
 	virtual bool framebufferScalingAllowed();
 
-	GLint u_texSizeInv, u_translation;
+	GLint u_texSizeInv, u_translation, u_spriteMat;
 };
 
 class FlatColorShader : public ShaderBase
@@ -134,11 +135,6 @@ class SimpleSpriteShader : public ShaderBase
 {
 public:
 	SimpleSpriteShader();
-
-	void setSpriteMat(const float value[16]);
-
-private:
-	GLint u_spriteMat;
 };
 
 class AlphaSpriteShader : public ShaderBase
@@ -146,11 +142,10 @@ class AlphaSpriteShader : public ShaderBase
 public:
 	AlphaSpriteShader();
 
-	void setSpriteMat(const float value[16]);
 	void setAlpha(float value);
 
 private:
-	GLint u_spriteMat, u_alpha;
+	GLint u_alpha;
 };
 
 class TransShader : public ShaderBase
@@ -186,7 +181,6 @@ class SpriteShader : public ShaderBase
 public:
 	SpriteShader();
 
-	void setSpriteMat(const float value[16]);
 	void setTone(const Vec4 &value);
 	void setColor(const Vec4 &value);
 	void setOpacity(float value);

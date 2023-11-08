@@ -91,6 +91,7 @@ void tilemapVXBindingInit();
 void inputBindingInit();
 void audioBindingInit();
 void graphicsBindingInit();
+void fpsBindingInit();
 
 void fileIntBindingInit();
 
@@ -103,6 +104,11 @@ void CUSLBindingInit();
 #endif
 
 void httpBindingInit();
+
+void compiledShaderBindingInit();
+void shaderBindingInit();
+
+void etc_internalBindingInit();
 
 RB_METHOD(mkxpDelta);
 RB_METHOD(mriPrint);
@@ -172,6 +178,7 @@ static void mriBindingInit() {
     inputBindingInit();
     audioBindingInit();
     graphicsBindingInit();
+    fpsBindingInit();
     
     fileIntBindingInit();
     
@@ -184,6 +191,11 @@ static void mriBindingInit() {
 #endif
     
     httpBindingInit();
+
+	shaderBindingInit();
+	compiledShaderBindingInit();
+	
+	etc_internalBindingInit();
     
     if (rgssVer >= 3) {
         _rb_define_module_function(rb_mKernel, "rgss_main", mriRgssMain);

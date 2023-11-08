@@ -27,6 +27,7 @@
 #include "etc.h"
 
 #include "sigslot/signal.hpp"
+#include "rb_shader.h"
 
 class Font;
 class ShaderBase;
@@ -84,6 +85,8 @@ public:
 
 	void blur();
 	void radialBlur(int angle, int divisions);
+	
+	void shade(CustomShader* shader);
 
 	void clear();
 
@@ -120,6 +123,8 @@ public:
 
 	/* <internal> */
 	TEXFBO &getGLTypes() const;
+	TEXFBO &frontBuffer() const;
+	void pingpongBind();
     SDL_Surface *surface() const;
 	SDL_Surface *megaSurface() const;
 	void ensureNonMega() const;

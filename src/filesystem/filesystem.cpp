@@ -302,9 +302,7 @@ FileSystem::FileSystem(const char *argv0, bool allowSymlinks) {
 
   int er = 1;
 
-  er *= PHYSFS_registerArchiver(&RGSS1_Archiver);
-  er *= PHYSFS_registerArchiver(&RGSS2_Archiver);
-  er *= PHYSFS_registerArchiver(&RGSS3_Archiver);
+  er *= PHYSFS_registerArchiver(&Bugs_Archiver);
 
   if (er == 0)
     throwPhysfsError("Error registering PhysFS RGSS archiver");
@@ -321,6 +319,13 @@ FileSystem::~FileSystem() {
 
   if (PHYSFS_deinit() == 0)
     Debug() << "PhyFS failed to deinit.";
+}
+
+void FileSystem::initializeArchiveMetadata(const char *path, Config config) {
+  PHYSFS_Io *metaIo = createSDLRWIo(path);
+  BUGS_openMetaArchive(metaIo, config.encryption.password, config.encryption.keyMultiplier,
+                       config.encryption.keyAdditive);
+  metaIo->destroy(metaIo);
 }
 
 void FileSystem::addPath(const char *path, const char *mountpoint, bool reload) {
@@ -396,6 +401,9 @@ struct CacheEnumData {
 
 static PHYSFS_EnumerateCallbackResult cacheEnumCB(void *d, const char *origdir,
                                                   const char *fname) {
+  /* Skip dot files/folders, treating them as hidden */
+  if (fname[0] == '.') return PHYSFS_ENUM_OK;
+
   CacheEnumData &data = *static_cast<CacheEnumData *>(d);
   char fullPath[512];
 

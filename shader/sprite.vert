@@ -32,4 +32,5 @@ void main()
             v_patCoord = (texCoord * (texSizeInv / patternZoom)) - (scroll * texSizeInv);
         }
     }
+
 }

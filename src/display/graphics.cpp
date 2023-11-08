@@ -59,15 +59,17 @@
 
 #include <algorithm>
 #include <errno.h>
-#include <sys/time.h>
+//#include <sys/time.h>
 #include <unistd.h>
 #include <time.h>
 #include <cmath>
 #include <climits>
 
+#include "binding-types.h"
 
-#define DEF_SCREEN_W (rgssVer == 1 ? 640 : 544)
-#define DEF_SCREEN_H (rgssVer == 1 ? 480 : 416)
+
+#define DEF_SCREEN_W 736
+#define DEF_SCREEN_H 416
 
 #define DEF_FRAMERATE (rgssVer == 1 ? 40 : 60)
 
@@ -403,13 +405,13 @@ struct Movie
             audioQueueHead = NULL;
             SDL_DestroyMutex(audioMutex);
             audioThreadTermReq.set();
-            if(audioThread) {
-                SDL_WaitThread(audioThread, 0);
-                audioThread = 0;
-            }
             alSourceStop(audioSource);
             alDeleteSources(1, &audioSource);
             alDeleteBuffers(STREAM_BUFS, alBuffers);
+        }
+        if(audioThread) {
+            SDL_WaitThread(audioThread, 0);
+            audioThread = 0;
         }
         if (video) THEORAPLAY_freeVideo(video);
         if (audio) THEORAPLAY_freeAudio(audio);
@@ -523,7 +525,7 @@ public:
         }
     }
     
-    void requestViewportRender(const Vec4 &c, const Vec4 &f, const Vec4 &t) {
+    void requestViewportRender(const Vec4 &c, const Vec4 &f, const Vec4 &t, const VALUE &shaderArr) {
         const IntRect &viewpRect = glState.scissorBox.get();
         const IntRect &screenRect = geometry.rect;
         
@@ -561,6 +563,49 @@ public:
             screenQuad.draw();
             glState.blend.pop();
         }
+
+		if (shaderArr)
+		{
+			long size = rb_array_len(shaderArr);
+
+			for (long i = 0; i < size; i++)
+			{
+				VALUE value = rb_ary_entry(shaderArr, i);
+
+				pp.swapRender();
+
+				if (!viewpRect.encloses(screenRect))
+				{
+					/* Scissor test _does_ affect FBO blit operations,
+					 * and since we're inside the draw cycle, it will
+					 * be turned on, so turn it off temporarily */
+					glState.scissorTest.pushSet(false);
+
+					GLMeta::blitBegin(pp.frontBuffer());
+					GLMeta::blitSource(pp.backBuffer());
+					GLMeta::blitRectangle(geometry.rect, Vec2i());
+					GLMeta::blitEnd();
+
+					glState.scissorTest.pop();
+				}
+
+				CustomShader *shader = getPrivateDataCheck<CustomShader>(value, CustomShaderType);
+				CompiledShader *compiled = shader->getShader();
+
+				compiled->bind();
+				compiled->applyViewportProj();
+				shader->applyArgs();
+				compiled->setTexSize(screenRect.size());
+                shader->incrementPhase();
+                shader->setTime();
+
+				TEX::bind(pp.backBuffer().tex);
+
+				glState.blend.pushSet(false);
+				screenQuad.draw();
+				glState.blend.pop();
+			}
+		}
         
         if (!toneRGBEffect && !colorEffect && !flashEffect)
             return;
@@ -1083,14 +1128,7 @@ struct GraphicsPrivate {
         
         swapGLBuffer();
         
-        SDL_LockMutex(avgFPSLock);
-        if (avgFPSData.size() > 40)
-            avgFPSData.erase(avgFPSData.begin());
-        
-        double time = shState->runTime();
-        avgFPSData.push_back(time - last_avg_update);
-        last_avg_update = time;
-        SDL_UnlockMutex(avgFPSLock);
+        updateAvgFPS();
     }
     
     void checkSyncLock() {
@@ -1129,6 +1167,17 @@ struct GraphicsPrivate {
         if (!(force || multithreadedMode)) return;
         
         SDL_UnlockMutex(glResourceLock);
+    }
+
+    void updateAvgFPS() {
+        SDL_LockMutex(avgFPSLock);
+        if (avgFPSData.size() > 40)
+            avgFPSData.erase(avgFPSData.begin());
+        
+        double time = shState->runTime();
+        avgFPSData.push_back(time - last_avg_update);
+        last_avg_update = time;
+        SDL_UnlockMutex(avgFPSLock);
     }
 };
 
@@ -1309,6 +1358,8 @@ void Graphics::transition(int duration, const char *filename, int vague) {
         GLMeta::blitEnd();
         
         p->swapGLBuffer();
+        /* Call this manually, as redrawScreen() is not called during this loop. */
+        p->updateAvgFPS();
     }
     
     glState.blend.pop();
@@ -1327,7 +1378,7 @@ DEF_ATTR_RD_SIMPLE(Graphics, FrameRate, int, p->frameRate)
 DEF_ATTR_SIMPLE(Graphics, FrameCount, int, p->frameCount)
 
 void Graphics::setFrameRate(int value) {
-    p->frameRate = clamp(value, 10, 120);
+    p->frameRate = clamp(value, 1, 120);
     
     if (p->threadData->config.syncToRefreshrate)
         return;
@@ -1499,7 +1550,7 @@ bool Graphics::updateMovieInput(Movie *movie) {
     return  p->threadData->rqTerm || p->threadData->rqReset;
 }
 
-void Graphics::playMovie(const char *filename, int volume_, bool skippable) {
+void Graphics::playMovie(const char *filename, int volume_, bool skippable, void *shaderArr) {
     if (shState->config().enableHires) {
         Debug() << "BUG: High-res Graphics playMovie not implemented";
     }
@@ -1509,11 +1560,14 @@ void Graphics::playMovie(const char *filename, int volume_, bool skippable) {
     shState->fileSystem().openRead(handler, filename);
     float volume = volume_ * 0.01f;
     
-    if (movie->preparePlayback()) {        
+    if (movie->preparePlayback()) {
         Sprite movieSprite;
-        
+
         // Currently this stretches to fit the screen. VX Ace behavior is to center it and let the edges run off
         movieSprite.setBitmap(movie->videoBitmap);
+        // Pass around void* because trying to include in graphics.h to have access to VALUE is a compilation nightmare
+        if(shaderArr != 0) movieSprite.setShaderArr(*reinterpret_cast<VALUE*>(shaderArr));
+
         double ratio = std::min((double)width() / movie->video->width, (double)height() / movie->video->height);
         movieSprite.setZoomX(ratio);
         movieSprite.setZoomY(ratio);
@@ -1670,7 +1724,7 @@ double Graphics::getScale() const {
 
 void Graphics::setScale(double factor) {
     p->threadData->rqWindowAdjust.wait();
-    factor = clamp(factor, 0.5, 4.0);
+    factor = clamp(factor, 1.0, 3.0);
     
     if (factor == getScale())
         return;

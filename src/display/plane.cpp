@@ -35,6 +35,9 @@
 #include "glstate.h"
 
 #include "sigslot/signal.hpp"
+#include "binding-util.h"
+#include "rb_shader.h"
+#include "binding-types.h"
 
 static float fwrap(float value, float range)
 {
@@ -64,6 +67,8 @@ struct PlanePrivate
 
 	sigslot::connection prepareCon;
 
+	VALUE shaderArr;
+
 	PlanePrivate()
 	    : bitmap(0),
 	      opacity(255),
@@ -72,7 +77,8 @@ struct PlanePrivate
 	      tone(&tmp.tone),
 	      ox(0), oy(0),
 	      zoomX(1), zoomY(1),
-	      quadSourceDirty(false)
+	      quadSourceDirty(false),
+		  shaderArr(0)
 	{
 		prepareCon = shState->prepareDraw.connect
 		        (&PlanePrivate::prepare, this);
@@ -144,6 +150,26 @@ struct PlanePrivate
 			quadSourceDirty = false;
 		}
 	}
+
+    CompiledShader* bindCustomShader(long i, int width, int height)
+    {
+        VALUE value = rb_ary_entry(shaderArr, i);
+        CustomShader* shader = getPrivateDataCheck<CustomShader>(value, CustomShaderType);
+        CompiledShader* compiled = shader->getShader();
+
+        compiled->bind();
+        compiled->applyViewportProj();
+
+        shader->applyArgs();
+        shader->setFloat("opacity", opacity.norm);
+		shader->setVec4("color", color->norm);
+		shader->setVec4("tone", tone->norm);
+        shader->incrementPhase();
+        shader->setTime();
+
+        compiled->setTexSize(Vec2i(width, height));
+        return compiled;
+    }
 };
 
 Plane::Plane(Viewport *viewport)
@@ -164,6 +190,7 @@ DEF_ATTR_RD_SIMPLE(Plane, BlendType, int,     p->blendType)
 DEF_ATTR_SIMPLE(Plane, Opacity,   int,     p->opacity)
 DEF_ATTR_SIMPLE(Plane, Color,     Color&, *p->color)
 DEF_ATTR_SIMPLE(Plane, Tone,      Tone&,  *p->tone)
+DEF_ATTR_SIMPLE(Plane, ShaderArr, VALUE, p->shaderArr)
 
 Plane::~Plane()
 {
@@ -286,8 +313,50 @@ void Plane::draw()
 	}
 
 	glState.blendMode.pushSet(p->blendType);
-
 	p->bitmap->bindTex(*base);
+
+	if(p->shaderArr)
+	{
+		long size = rb_array_len(p->shaderArr);
+		if (size > 0) {
+			// Store the current FBO used, as FBO::unbind() will set it to 0 which is not correct
+			GLint originalFbo = 0;
+			gl.GetIntegerv(GL_FRAMEBUFFER_BINDING, &originalFbo);
+
+			// Get the general purpose quad and set it to the bitmap's dimensions for shader stacking
+			// This is needed to ensure that the shaders apply to the bitmap's size and position in isolation
+			Quad &quad = shState->gpQuad();
+			int width = p->bitmap->width(), height = p->bitmap->height();
+			FloatRect rect(0, 0, width, height);
+			quad.setTexPosRect(rect, rect);
+			glState.blend.pushSet(false);
+			glState.viewport.pushSet(IntRect(0, 0, width, height));
+			
+			// Bind the bitmap's frontBuffer FBO and use the temporary viewport to render the plane in isolation. This
+			// will apply the plane's main shader first as the base shader.
+			FBO::bind(p->bitmap->frontBuffer().fbo);
+			base->applyViewportProj();
+			
+			CompiledShader *customShader;
+			for (long i = 0; i < size; i++) {
+				// Using the currently bound shader, draw using the general purpose quad. This writes to the frontBuffer
+				quad.draw();
+				// Now, the frontBuffer TBO contains the output of the above draw call. Swap frontBuffer and backBuffer,
+				// binding the resulting output TBO as the next input TBO.
+				p->bitmap->pingpongBind();
+				// Bind the custom shader and assign it, as the final one must be drawn differently
+				customShader = p->bindCustomShader(i, width, height);
+			}
+
+			// Restore the original viewport and blend
+			glState.viewport.pop();
+			glState.blend.pop();
+			customShader->applyViewportProj();
+
+			// Restore the original FBO for the final draw
+			gl.BindFramebuffer(GL_FRAMEBUFFER, originalFbo);
+		}
+	}
 
 	if (gl.npot_repeat)
 		TEX::setRepeat(true);

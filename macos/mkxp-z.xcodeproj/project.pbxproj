@@ -9,6 +9,30 @@
 /* Begin PBXBuildFile section */
 		02054AB6B60F49E3DF366CBD /* libjxl_dec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 672947DA8FC50921A7ED814A /* libjxl_dec.a */; };
 		3389416F9825F408A40824F3 /* libbrotlicommon-static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8AA4AE49BB66C97EFAE3055 /* libbrotlicommon-static.a */; };
+		0F7F7ED3293594EC00A17DC6 /* fps-binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7ED2293594EB00A17DC6 /* fps-binding.cpp */; };
+		0F7F7ED4293594EC00A17DC6 /* fps-binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7ED2293594EB00A17DC6 /* fps-binding.cpp */; };
+		0F7F7ED5293594EC00A17DC6 /* fps-binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7ED2293594EB00A17DC6 /* fps-binding.cpp */; };
+		0F7F7ED6293594EC00A17DC6 /* fps-binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7ED2293594EB00A17DC6 /* fps-binding.cpp */; };
+		0F7F7EDA2935963000A17DC6 /* compiled-shader-binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7ED92935963000A17DC6 /* compiled-shader-binding.cpp */; };
+		0F7F7EDB2935963000A17DC6 /* compiled-shader-binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7ED92935963000A17DC6 /* compiled-shader-binding.cpp */; };
+		0F7F7EDC2935963000A17DC6 /* compiled-shader-binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7ED92935963000A17DC6 /* compiled-shader-binding.cpp */; };
+		0F7F7EDD2935963000A17DC6 /* compiled-shader-binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7ED92935963000A17DC6 /* compiled-shader-binding.cpp */; };
+		0F7F7EE02935964600A17DC6 /* etc-internal-binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7EDF2935964600A17DC6 /* etc-internal-binding.cpp */; };
+		0F7F7EE12935964600A17DC6 /* etc-internal-binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7EDF2935964600A17DC6 /* etc-internal-binding.cpp */; };
+		0F7F7EE22935964600A17DC6 /* etc-internal-binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7EDF2935964600A17DC6 /* etc-internal-binding.cpp */; };
+		0F7F7EE32935964600A17DC6 /* etc-internal-binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7EDF2935964600A17DC6 /* etc-internal-binding.cpp */; };
+		0F7F7EE6293596FC00A17DC6 /* rb_shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7EE5293596FC00A17DC6 /* rb_shader.cpp */; };
+		0F7F7EE7293596FC00A17DC6 /* rb_shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7EE5293596FC00A17DC6 /* rb_shader.cpp */; };
+		0F7F7EE8293596FC00A17DC6 /* rb_shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7EE5293596FC00A17DC6 /* rb_shader.cpp */; };
+		0F7F7EE9293596FC00A17DC6 /* rb_shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7EE5293596FC00A17DC6 /* rb_shader.cpp */; };
+		0F7F7EF12935A56400A17DC6 /* shader-binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7EF02935A56400A17DC6 /* shader-binding.cpp */; };
+		0F7F7EF22935A56400A17DC6 /* shader-binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7EF02935A56400A17DC6 /* shader-binding.cpp */; };
+		0F7F7EF32935A56400A17DC6 /* shader-binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7EF02935A56400A17DC6 /* shader-binding.cpp */; };
+		0F7F7EF42935A56400A17DC6 /* shader-binding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7EF02935A56400A17DC6 /* shader-binding.cpp */; };
+		0F7F7EFD2935A71200A17DC6 /* firstperson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7EFC2935A71200A17DC6 /* firstperson.cpp */; };
+		0F7F7EFE2935A71200A17DC6 /* firstperson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7EFC2935A71200A17DC6 /* firstperson.cpp */; };
+		0F7F7EFF2935A71200A17DC6 /* firstperson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7EFC2935A71200A17DC6 /* firstperson.cpp */; };
+		0F7F7F002935A71200A17DC6 /* firstperson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F7EFC2935A71200A17DC6 /* firstperson.cpp */; };
 		3B10EC5C2568D40500372D13 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BE081562568D3A60006849F /* CoreGraphics.framework */; };
 		3B10EC5D2568D40C00372D13 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BE081552568D3A60006849F /* Carbon.framework */; };
 		3B10EC5F2568D40C00372D13 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BE081542568D3A60006849F /* Metal.framework */; };
@@ -845,6 +869,14 @@
 
 /* Begin PBXFileReference section */
 		293E462B94F6FA33CCB8B20C /* libbrotlicommon-static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libbrotlicommon-static.a"; path = "Dependencies/build-macosx-x86_64/lib/libbrotlicommon-static.a"; sourceTree = "<group>"; };
+		0F7F7ED2293594EB00A17DC6 /* fps-binding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "fps-binding.cpp"; sourceTree = "<group>"; };
+		0F7F7ED92935963000A17DC6 /* compiled-shader-binding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "compiled-shader-binding.cpp"; sourceTree = "<group>"; };
+		0F7F7EDF2935964600A17DC6 /* etc-internal-binding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "etc-internal-binding.cpp"; sourceTree = "<group>"; };
+		0F7F7EE5293596FC00A17DC6 /* rb_shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rb_shader.cpp; sourceTree = "<group>"; };
+		0F7F7EEA2935970B00A17DC6 /* rb_shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rb_shader.h; sourceTree = "<group>"; };
+		0F7F7EF02935A56400A17DC6 /* shader-binding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "shader-binding.cpp"; sourceTree = "<group>"; };
+		0F7F7EFB2935A70400A17DC6 /* firstperson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = firstperson.h; path = fps/firstperson.h; sourceTree = "<group>"; };
+		0F7F7EFC2935A71200A17DC6 /* firstperson.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = firstperson.cpp; path = fps/firstperson.cpp; sourceTree = "<group>"; };
 		3B012198261544A0001E574A /* string-util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "string-util.h"; sourceTree = "<group>"; };
 		3B10EC832568E78400372D13 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../assets/icon.png; sourceTree = "<group>"; };
 		3B10EC842568E78400372D13 /* liberation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = liberation.ttf; path = ../assets/liberation.ttf; sourceTree = "<group>"; };
@@ -1055,8 +1087,8 @@
 		3B5A845C256A465700BAF2E5 /* system.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
 		3B5A845D256A465700BAF2E5 /* systemImpl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = systemImpl.cpp; sourceTree = "<group>"; };
 		3B5A8463256A46B200BAF2E5 /* systemImplApple.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = systemImplApple.mm; sourceTree = "<group>"; };
-		3B5E1F0925A881FB0086FFDC /* libEGL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.dylib; path = Dependencies/Frameworks/ANGLE/libEGL.dylib; sourceTree = "<group>"; };
-		3B5E1F0A25A881FB0086FFDC /* libGLESv2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLESv2.dylib; path = Dependencies/Frameworks/ANGLE/libGLESv2.dylib; sourceTree = "<group>"; };
+		3B5E1F0925A881FB0086FFDC /* libEGL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.dylib; path = ../vendor/ANGLE/libEGL.dylib; sourceTree = "<group>"; };
+		3B5E1F0A25A881FB0086FFDC /* libGLESv2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLESv2.dylib; path = ../vendor/ANGLE/libGLESv2.dylib; sourceTree = "<group>"; };
 		3B609374268274CE0038E9D6 /* encoding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = encoding.h; sourceTree = "<group>"; };
 		3BA08EA4256641ED00449CFF /* Assets.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Assets.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BA08EA6256641EE00449CFF /* Assets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Assets.plist; sourceTree = "<group>"; };
@@ -1346,6 +1378,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F7F7EFA2935A6F500A17DC6 /* fps */ = {
+			isa = PBXGroup;
+			children = (
+				0F7F7EFC2935A71200A17DC6 /* firstperson.cpp */,
+				0F7F7EFB2935A70400A17DC6 /* firstperson.h */,
+			);
+			name = fps;
+			sourceTree = "<group>";
+		};
 		3B10EC6C2568E5EA00372D13 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -1393,6 +1434,8 @@
 		3B10ED342568E95D00372D13 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				0F7F7EFA2935A6F500A17DC6 /* fps */,
+				3B522DB1259BBFE9003301C4 /* net */,
 				3B5A84052569B56F00BAF2E5 /* config.cpp */,
 				3B10ED352568E95D00372D13 /* eventthread.cpp */,
 				3B10ED562568E95D00372D13 /* main.cpp */,
@@ -1521,6 +1564,13 @@
 		3B10ED6F2568E95D00372D13 /* display */ = {
 			isa = PBXGroup;
 			children = (
+				0F7F7EEA2935970B00A17DC6 /* rb_shader.h */,
+				0F7F7EE5293596FC00A17DC6 /* rb_shader.cpp */,
+				3BA6944D263DAB53004194EB /* libnsgif */,
+				3B10ED7E2568E95D00372D13 /* gl */,
+				3B10ED702568E95D00372D13 /* tilemap.h */,
+				3B10ED712568E95D00372D13 /* tilemap-common.h */,
+				3B10ED722568E95D00372D13 /* windowvx.cpp */,
 				3B10EDA22568E95E00372D13 /* autotiles.cpp */,
 				3B10ED9D2568E95E00372D13 /* autotilesvx.cpp */,
 				3B10ED732568E95D00372D13 /* bitmap.cpp */,
@@ -1588,6 +1638,14 @@
 		3B10EDD52568E96A00372D13 /* binding */ = {
 			isa = PBXGroup;
 			children = (
+				0F7F7EF02935A56400A17DC6 /* shader-binding.cpp */,
+				0F7F7EDF2935964600A17DC6 /* etc-internal-binding.cpp */,
+				0F7F7ED92935963000A17DC6 /* compiled-shader-binding.cpp */,
+				0F7F7ED2293594EB00A17DC6 /* fps-binding.cpp */,
+				3B10EDD62568E96A00372D13 /* window-binding.cpp */,
+				3B10EDD72568E96A00372D13 /* filesystem-binding.cpp */,
+				3B10EDD82568E96A00372D13 /* viewportelement-binding.h */,
+				3B10EDD92568E96A00372D13 /* cusl-binding.cpp */,
 				3B10EDDA2568E96A00372D13 /* audio-binding.cpp */,
 				3B10EDF02568E96A00372D13 /* binding-mri.cpp */,
 				3B10EDEF2568E96A00372D13 /* binding-util.cpp */,
@@ -2246,21 +2304,27 @@
 				3B1C237B25A19C600075EF5D /* net.cpp in Sources */,
 				3B1C237C25A19C600075EF5D /* table-binding.cpp in Sources */,
 				3B1C237D25A19C600075EF5D /* config.cpp in Sources */,
+				0F7F7EF42935A56400A17DC6 /* shader-binding.cpp in Sources */,
 				3B1C237E25A19C600075EF5D /* bitmap-binding.cpp in Sources */,
 				3B1C237F25A19C600075EF5D /* vorbissource.cpp in Sources */,
+				0F7F7F002935A71200A17DC6 /* firstperson.cpp in Sources */,
 				3B1C238125A19C600075EF5D /* filesystem-binding.cpp in Sources */,
 				3B1C238325A19C600075EF5D /* glstate.cpp in Sources */,
+				0F7F7ED6293594EC00A17DC6 /* fps-binding.cpp in Sources */,
 				3B1C238425A19C600075EF5D /* gl-fun.cpp in Sources */,
 				3B1C238525A19C600075EF5D /* sprite-binding.cpp in Sources */,
 				3B1C238625A19C600075EF5D /* sprite.cpp in Sources */,
 				3B1C238725A19C600075EF5D /* cusl-binding.cpp in Sources */,
+				0F7F7EE32935964600A17DC6 /* etc-internal-binding.cpp in Sources */,
 				3B1C238825A19C600075EF5D /* sdlsoundsource.cpp in Sources */,
 				3B1C238925A19C600075EF5D /* viewport-binding.cpp in Sources */,
 				3B1C238A25A19C600075EF5D /* windowvx-binding.cpp in Sources */,
 				3B1C238B25A19C600075EF5D /* windowvx.cpp in Sources */,
+				0F7F7EDD2935963000A17DC6 /* compiled-shader-binding.cpp in Sources */,
 				3B1C238C25A19C600075EF5D /* LUrlParser.cpp in Sources */,
 				3B1C238D25A19C600075EF5D /* module_rpg.cpp in Sources */,
 				9656359E279A5B74003D6A75 /* theoraplay.c in Sources */,
+				0F7F7EE9293596FC00A17DC6 /* rb_shader.cpp in Sources */,
 				3B1C238E25A19C600075EF5D /* miniffi.cpp in Sources */,
 				3B1C238F25A19C600075EF5D /* autotiles.cpp in Sources */,
 				3B1C239025A19C600075EF5D /* audiostream.cpp in Sources */,
@@ -2334,21 +2398,27 @@
 				3BBE878F2705A73400A574AE /* net.cpp in Sources */,
 				3BBE87902705A73400A574AE /* table-binding.cpp in Sources */,
 				3BBE87912705A73400A574AE /* config.cpp in Sources */,
+				0F7F7EF32935A56400A17DC6 /* shader-binding.cpp in Sources */,
 				3BBE87922705A73400A574AE /* bitmap-binding.cpp in Sources */,
 				3BBE87932705A73400A574AE /* vorbissource.cpp in Sources */,
+				0F7F7EFF2935A71200A17DC6 /* firstperson.cpp in Sources */,
 				3BBE87942705A73400A574AE /* filesystem-binding.cpp in Sources */,
 				3BBE87952705A73400A574AE /* glstate.cpp in Sources */,
+				0F7F7ED5293594EC00A17DC6 /* fps-binding.cpp in Sources */,
 				3BBE87962705A73400A574AE /* gl-fun.cpp in Sources */,
 				3BBE87972705A73400A574AE /* sprite-binding.cpp in Sources */,
 				3BBE87982705A73400A574AE /* sprite.cpp in Sources */,
 				3BBE87992705A73400A574AE /* cusl-binding.cpp in Sources */,
+				0F7F7EE22935964600A17DC6 /* etc-internal-binding.cpp in Sources */,
 				3BBE879A2705A73400A574AE /* sdlsoundsource.cpp in Sources */,
 				3BBE879B2705A73400A574AE /* viewport-binding.cpp in Sources */,
 				3BBE879C2705A73400A574AE /* windowvx-binding.cpp in Sources */,
 				3BBE879D2705A73400A574AE /* windowvx.cpp in Sources */,
+				0F7F7EDC2935963000A17DC6 /* compiled-shader-binding.cpp in Sources */,
 				3BBE879E2705A73400A574AE /* LUrlParser.cpp in Sources */,
 				3BBE879F2705A73400A574AE /* module_rpg.cpp in Sources */,
 				9656359D279A5B74003D6A75 /* theoraplay.c in Sources */,
+				0F7F7EE8293596FC00A17DC6 /* rb_shader.cpp in Sources */,
 				3BBE87A02705A73400A574AE /* miniffi.cpp in Sources */,
 				3BBE87A12705A73400A574AE /* autotiles.cpp in Sources */,
 				3BBE87A22705A73400A574AE /* audiostream.cpp in Sources */,
@@ -2414,6 +2484,8 @@
 				3BC65D952584F3AD0063AFF1 /* alstream.cpp in Sources */,
 				3BC65D962584F3AD0063AFF1 /* table.cpp in Sources */,
 				3B522DC0259BD072003301C4 /* net.cpp in Sources */,
+				0F7F7EE02935964600A17DC6 /* etc-internal-binding.cpp in Sources */,
+				0F7F7ED3293594EC00A17DC6 /* fps-binding.cpp in Sources */,
 				3BC65D972584F3AD0063AFF1 /* table-binding.cpp in Sources */,
 				3BC65D982584F3AD0063AFF1 /* config.cpp in Sources */,
 				3BC65D992584F3AD0063AFF1 /* bitmap-binding.cpp in Sources */,
@@ -2426,8 +2498,10 @@
 				3BC65DA12584F3AD0063AFF1 /* sprite.cpp in Sources */,
 				3BC65DA22584F3AD0063AFF1 /* cusl-binding.cpp in Sources */,
 				3BC65DA32584F3AD0063AFF1 /* sdlsoundsource.cpp in Sources */,
+				0F7F7EE6293596FC00A17DC6 /* rb_shader.cpp in Sources */,
 				3BC65DA42584F3AD0063AFF1 /* viewport-binding.cpp in Sources */,
 				3BC65DA52584F3AD0063AFF1 /* windowvx-binding.cpp in Sources */,
+				0F7F7EFD2935A71200A17DC6 /* firstperson.cpp in Sources */,
 				3BC65DA62584F3AD0063AFF1 /* windowvx.cpp in Sources */,
 				3B522DE5259C2039003301C4 /* LUrlParser.cpp in Sources */,
 				3BC65DA72584F3AD0063AFF1 /* module_rpg.cpp in Sources */,
@@ -2445,6 +2519,7 @@
 				3BC65DB32584F3AD0063AFF1 /* input-binding.cpp in Sources */,
 				3BC65DB42584F3AD0063AFF1 /* keybindings.cpp in Sources */,
 				3BC65DB52584F3AD0063AFF1 /* filesystem.cpp in Sources */,
+				0F7F7EDA2935963000A17DC6 /* compiled-shader-binding.cpp in Sources */,
 				3BC65DB62584F3AD0063AFF1 /* binding-mri.cpp in Sources */,
 				3BC65DB82584F3AD0063AFF1 /* eventthread.cpp in Sources */,
 				3BC65DB92584F3AD0063AFF1 /* viewport.cpp in Sources */,
@@ -2475,6 +2550,7 @@
 				3BC65DD52584F3AD0063AFF1 /* font.cpp in Sources */,
 				3B1BC0E1266F7C2600794D22 /* iniconfig.cpp in Sources */,
 				3BC65DD82584F3AD0063AFF1 /* filesystemImplApple.mm in Sources */,
+				0F7F7EF12935A56400A17DC6 /* shader-binding.cpp in Sources */,
 				3BC65DDA2584F3AD0063AFF1 /* sharedstate.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2494,6 +2570,8 @@
 				3B10EDB42568E95E00372D13 /* alstream.cpp in Sources */,
 				3B10EDAA2568E95E00372D13 /* table.cpp in Sources */,
 				3B522DC1259BD072003301C4 /* net.cpp in Sources */,
+				0F7F7EE12935964600A17DC6 /* etc-internal-binding.cpp in Sources */,
+				0F7F7ED4293594EC00A17DC6 /* fps-binding.cpp in Sources */,
 				3B10EE002568E96A00372D13 /* table-binding.cpp in Sources */,
 				3B5A84062569B56F00BAF2E5 /* config.cpp in Sources */,
 				3B10EDFF2568E96A00372D13 /* bitmap-binding.cpp in Sources */,
@@ -2506,8 +2584,10 @@
 				3B10EDBF2568E95E00372D13 /* sprite.cpp in Sources */,
 				3B10EDF72568E96A00372D13 /* cusl-binding.cpp in Sources */,
 				3B10EDB62568E95E00372D13 /* sdlsoundsource.cpp in Sources */,
+				0F7F7EE7293596FC00A17DC6 /* rb_shader.cpp in Sources */,
 				3B10EE0C2568E96A00372D13 /* viewport-binding.cpp in Sources */,
 				3B10EDFA2568E96A00372D13 /* windowvx-binding.cpp in Sources */,
+				0F7F7EFE2935A71200A17DC6 /* firstperson.cpp in Sources */,
 				3B10EDBC2568E95E00372D13 /* windowvx.cpp in Sources */,
 				3B522DE6259C2039003301C4 /* LUrlParser.cpp in Sources */,
 				3B10EE0B2568E96A00372D13 /* module_rpg.cpp in Sources */,
@@ -2525,6 +2605,7 @@
 				3B10EDF92568E96A00372D13 /* input-binding.cpp in Sources */,
 				3B10EDA92568E95E00372D13 /* keybindings.cpp in Sources */,
 				3B10EDAD2568E95E00372D13 /* filesystem.cpp in Sources */,
+				0F7F7EDB2935963000A17DC6 /* compiled-shader-binding.cpp in Sources */,
 				3B10EE092568E96A00372D13 /* binding-mri.cpp in Sources */,
 				3B10EDA62568E95E00372D13 /* eventthread.cpp in Sources */,
 				3B10EDD02568E95E00372D13 /* viewport.cpp in Sources */,
@@ -2555,6 +2636,7 @@
 				3B10EDC02568E95E00372D13 /* font.cpp in Sources */,
 				3B1BC0E2266F7C2700794D22 /* iniconfig.cpp in Sources */,
 				3B5A840D2569BE7C00BAF2E5 /* filesystemImplApple.mm in Sources */,
+				0F7F7EF22935A56400A17DC6 /* shader-binding.cpp in Sources */,
 				3B10EDAC2568E95E00372D13 /* sharedstate.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2790,7 +2872,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Dependencies/Frameworks/ANGLE",
+					"../vendor/ANGLE",
 					"$(PROJECT_DIR)/Dependencies/build-macosx-x86_64/lib",
 				);
 				MARKETING_VERSION = 2.4.2;
@@ -2863,7 +2945,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Dependencies/Frameworks/ANGLE",
+					"../vendor/ANGLE",
 					"$(PROJECT_DIR)/Dependencies/build-macosx-x86_64/lib",
 				);
 				MARKETING_VERSION = 2.4.2;
@@ -3078,7 +3160,7 @@
 					"$(DEPENDENCY_SEARCH_PATH)/include/AL",
 					"$(DEPENDENCY_SEARCH_PATH)/include/openssl",
 					"$(DEPENDENCY_SEARCH_PATH)/include/uchardet",
-					"$(PROJECT_DIR)/Dependencies/Frameworks/ANGLE",
+					"../vendor/ANGLE",
 				);
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3086,7 +3168,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Dependencies/Frameworks/ANGLE",
+					"../vendor/ANGLE",
 					"$(PROJECT_DIR)/Dependencies/build-macosx-x86_64/lib",
 					"$(PROJECT_DIR)/Dependencies/build-macosx-universal/lib",
 				);
@@ -3165,7 +3247,7 @@
 					"$(DEPENDENCY_SEARCH_PATH)/include/AL",
 					"$(DEPENDENCY_SEARCH_PATH)/include/openssl",
 					"$(DEPENDENCY_SEARCH_PATH)/include/uchardet",
-					"$(PROJECT_DIR)/Dependencies/Frameworks/ANGLE",
+					"../vendor/ANGLE",
 				);
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3173,7 +3255,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Dependencies/Frameworks/ANGLE",
+					"../vendor/ANGLE",
 					"$(PROJECT_DIR)/Dependencies/build-macosx-x86_64/lib",
 					"$(PROJECT_DIR)/Dependencies/build-macosx-universal/lib",
 				);
@@ -3251,7 +3333,7 @@
 					"$(DEPENDENCY_SEARCH_PATH)/include/AL",
 					"$(DEPENDENCY_SEARCH_PATH)/include/openssl",
 					"$(DEPENDENCY_SEARCH_PATH)/include/uchardet",
-					"$(PROJECT_DIR)/Dependencies/Frameworks/ANGLE",
+					"../vendor/ANGLE",
 				);
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3259,7 +3341,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Dependencies/Frameworks/ANGLE",
+					"../vendor/ANGLE",
 					"$(PROJECT_DIR)/Dependencies/build-macosx-universal/lib",
 					"$(PROJECT_DIR)/Dependencies/build-macosx-x86_64/lib",
 				);
@@ -3332,7 +3414,7 @@
 					"$(DEPENDENCY_SEARCH_PATH)/include/AL",
 					"$(DEPENDENCY_SEARCH_PATH)/include/openssl",
 					"$(DEPENDENCY_SEARCH_PATH)/include/uchardet",
-					"$(PROJECT_DIR)/Dependencies/Frameworks/ANGLE",
+					"../vendor/ANGLE",
 				);
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3340,7 +3422,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Dependencies/Frameworks/ANGLE",
+					"../vendor/ANGLE",
 					"$(PROJECT_DIR)/Dependencies/build-macosx-universal/lib",
 					"$(PROJECT_DIR)/Dependencies/build-macosx-x86_64/lib",
 				);
@@ -3410,7 +3492,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Dependencies/Frameworks/ANGLE",
+					"../vendor/ANGLE",
 					"$(PROJECT_DIR)/Dependencies/build-macosx-x86_64/lib",
 				);
 				MARKETING_VERSION = 2.4.2;
@@ -3477,7 +3559,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Dependencies/Frameworks/ANGLE",
+					"../vendor/ANGLE",
 					"$(PROJECT_DIR)/Dependencies/build-macosx-x86_64/lib",
 				);
 				MARKETING_VERSION = 2.4.2;
@@ -3543,7 +3625,7 @@
 					"$(DEPENDENCY_SEARCH_PATH)/include/AL",
 					"$(DEPENDENCY_SEARCH_PATH)/include/openssl",
 					"$(DEPENDENCY_SEARCH_PATH)/include/uchardet",
-					"$(PROJECT_DIR)/Dependencies/Frameworks/ANGLE",
+					"../vendor/ANGLE",
 				);
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = (
@@ -3613,7 +3695,7 @@
 					"$(DEPENDENCY_SEARCH_PATH)/include/AL",
 					"$(DEPENDENCY_SEARCH_PATH)/include/openssl",
 					"$(DEPENDENCY_SEARCH_PATH)/include/uchardet",
-					"$(PROJECT_DIR)/Dependencies/Frameworks/ANGLE",
+					"../vendor/ANGLE",
 				);
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = (
