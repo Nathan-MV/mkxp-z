@@ -41,6 +41,7 @@
 #include "eventthread.h"
 
 #include <vector>
+#include "util/rapidcsv.h"
 
 extern "C" {
 #include <ruby.h>
@@ -158,6 +159,8 @@ RB_METHOD(mkxpStringToUTF8Bang);
 VALUE json2rb(json5pp::value const &v);
 json5pp::value rb2json(VALUE v);
 
+RB_METHOD(mkxpParseCSV);
+
 static void mriBindingInit() {
     tableBindingInit();
     etcBindingInit();
@@ -260,6 +263,8 @@ static void mriBindingInit() {
     _rb_define_module_function(mod, "launch", mkxpLaunch);
     
     _rb_define_module_function(mod, "default_font_family=", mkxpSetDefaultFontFamily);
+    
+    _rb_define_module_function(mod, "parse_csv", mkxpParseCSV);
     
     _rb_define_method(rb_cString, "to_utf8", mkxpStringToUTF8);
     _rb_define_method(rb_cString, "to_utf8!", mkxpStringToUTF8Bang);
@@ -690,6 +695,32 @@ RB_METHOD(mkxpLaunch) {
     }
     
     return RUBY_Qnil;
+}
+
+RB_METHOD(mkxpParseCSV) {
+    RB_UNUSED_PARAM;
+    
+    VALUE str;
+    rb_scan_args(argc, argv, "1", &str);
+    SafeStringValue(str);
+    
+    VALUE ret = rb_ary_new();
+    std::stringstream stream(RSTRING_PTR(str));
+    try {
+        rapidcsv::Document doc(stream, rapidcsv::LabelParams(-1,-1), rapidcsv::SeparatorParams(',', false, true, true, true));
+        for (int r = 0; r < doc.GetRowCount(); r++) {
+            VALUE col = rb_ary_new();
+            for (int c = 0; c < doc.GetColumnCount(); c++) {
+                std::string str = doc.GetCell<std::string>(c, r);
+                rb_ary_push(col, rb_utf8_str_new(str.c_str(), str.length()));
+            }
+            rb_ary_push(ret, col);
+        }
+    } catch (std::exception &e) {
+        raiseRbExc(Exception(Exception::MKXPError, "Failed to parse CSV: %s", e.what()));
+    }
+    
+    return ret;
 }
 
 json5pp::value loadUserSettings() {
