@@ -3,7 +3,8 @@ name: Automatic Build
 
 on:
   push:
-    branches: ['dev', 'autobuild']
+    branches:
+      - '*'
     paths-ignore: ['*.md', '*.json', '*.png']
   pull_request:
     branches: ['dev', 'autobuild']
