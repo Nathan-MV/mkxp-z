@@ -68,8 +68,8 @@
 #include "binding-types.h"
 
 
-#define DEF_SCREEN_W 736
-#define DEF_SCREEN_H 416
+#define DEF_SCREEN_W (rgssVer == 1 ? 640 : 544)
+#define DEF_SCREEN_H (rgssVer == 1 ? 480 : 416)
 
 #define DEF_FRAMERATE (rgssVer == 1 ? 40 : 60)
 
@@ -1724,7 +1724,7 @@ double Graphics::getScale() const {
 
 void Graphics::setScale(double factor) {
     p->threadData->rqWindowAdjust.wait();
-    factor = clamp(factor, 1.0, 3.0);
+    factor = clamp(factor, 0.5, 4.0);
     
     if (factor == getScale())
         return;
