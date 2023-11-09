@@ -372,39 +372,43 @@ void Config::readGameINI() {
     }
     
     std::string iniFileName(execName + ".ini");
-    SDLRWStream iniFile(iniFileName.c_str(), "r");
     
-    bool convSuccess = false;
-    if (iniFile)
-    {
-        INIConfiguration ic;
-        if (ic.load(iniFile.stream()))
-        {
-            GUARD(game.title = ic.getStringProperty("Game", "Title"););
-            GUARD(game.scripts = ic.getStringProperty("Game", "Scripts"););
-            
-            strReplace(game.scripts, '\\', '/');
-            
-            if (game.title.empty()) {
-                Debug() << iniFileName + ": Could not find Game.Title";
+    try {
+        SDLRWStream iniFile(iniFileName.c_str(), "r");
+        
+        if (iniFile) {
+            INIConfiguration ic;
+            if (ic.load(iniFile.stream())) {
+                GUARD(game.title = ic.getStringProperty("Game", "Title"););
+                GUARD(game.scripts = ic.getStringProperty("Game", "Scripts"););
+                
+                strReplace(game.scripts, '\\', '/');
+                
+                if (game.title.empty()) {
+                    Debug() << iniFileName + ": Could not find Game.Title";
+                }
+                
+                if (game.scripts.empty())
+                    Debug() << iniFileName + ": Could not find Game.Scripts";
             }
+        } else {
+            Debug() << "Could not read" << iniFileName;
             
-            if (game.scripts.empty())
-                Debug() << iniFileName + ": Could not find Game.Scripts";
+            // Set default values when the INI file is not found
+            rgssVersion = 3;
         }
+    } catch (const std::exception& e) {
+        // Handle the case when there is an error reading the INI file.
+        Debug() << "Error reading INI file: " << e.what();
     }
-    else
-        Debug() << "Could not read" << iniFileName;
     
     try {
         game.title = Encoding::convertString(game.title);
-        convSuccess = true;
-    }
-    catch (const Exception &e) {
+    } catch (const Exception &e) {
         Debug() << iniFileName + ": Could not determine encoding of Game.Title";
     }
     
-    if (game.title.empty() || !convSuccess)
+    if (game.title.empty())
         game.title = "mkxp-z";
     
     if (dataPathOrg.empty())

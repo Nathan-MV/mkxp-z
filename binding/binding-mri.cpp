@@ -42,6 +42,8 @@
 
 #include <vector>
 #include "util/rapidcsv.h"
+//#define RYML_SINGLE_HDR_DEFINE_NOW
+//#include <util/ryml_all.hpp>
 
 extern "C" {
 #include <ruby.h>
@@ -160,6 +162,7 @@ VALUE json2rb(json5pp::value const &v);
 json5pp::value rb2json(VALUE v);
 
 RB_METHOD(mkxpParseCSV);
+//RB_METHOD(mkxpParseYAML);
 
 static void mriBindingInit() {
     tableBindingInit();
@@ -265,6 +268,7 @@ static void mriBindingInit() {
     _rb_define_module_function(mod, "default_font_family=", mkxpSetDefaultFontFamily);
     
     _rb_define_module_function(mod, "parse_csv", mkxpParseCSV);
+    //_rb_define_module_function(mod, "parse_yaml", mkxpParseYAML);
     
     _rb_define_method(rb_cString, "to_utf8", mkxpStringToUTF8);
     _rb_define_method(rb_cString, "to_utf8!", mkxpStringToUTF8Bang);
@@ -696,6 +700,70 @@ RB_METHOD(mkxpLaunch) {
     
     return RUBY_Qnil;
 }
+
+// RB_METHOD(mkxpParseCSV) {
+//     RB_UNUSED_PARAM;
+
+//     VALUE filename;
+//     VALUE yaml;
+//     rb_scan_args(argc, argv, "2", &filename, &yaml);
+
+//     //std::stringstream stream(StringValueCStr(yaml));
+//     VALUE ret = Qnil;
+
+//     try {
+//         ryml::Tree t = ryml::parse_in_arena(yaml);
+//         ret = processYAMLNode(t.root());
+//     } catch (std::exception &e) {
+//         raiseRbExc(Exception(Exception::MKXPError, "Failed to parse CSV: %s", e.what()));
+//     }
+
+//     return ret;
+// }
+
+// VALUE processYAMLNode(const ryml::NodeRef& node) {
+//     switch (node.scalar_type()) {
+//         case ryml::SCALAR:
+//             return processYAMLScalar(node);
+//         case ryml::SEQUENCE:
+//             return processYAMLSequence(node);
+//         case ryml::MAP:
+//             return processYAMLMap(node);
+//         default:
+//             return Qnil; // Unsupported type, return nil
+//     }
+// }
+
+// VALUE processYAMLScalar(const ryml::NodeRef& node) {
+//     // Convert YAML scalar to Ruby type (string, integer, float, etc.)
+//     // Customize this based on your specific needs
+//     // Example: converting to Ruby string
+//     return rb_str_new2(node.scalar().c_str());
+// }
+
+// VALUE processYAMLSequence(const ryml::NodeRef& node) {
+//     // Convert YAML sequence to Ruby array
+//     VALUE ret = rb_ary_new();
+
+//     for (const auto& element : node.children()) {
+//         rb_ary_push(ret, processYAMLNode(element));
+//     }
+
+//     return ret;
+// }
+
+// VALUE processYAMLMap(const ryml::NodeRef& node) {
+//     // Convert YAML map to Ruby hash
+//     VALUE ret = rb_hash_new();
+
+//     for (const auto& pair : node.children()) {
+//         VALUE key = processYAMLNode(pair.key());
+//         VALUE value = processYAMLNode(pair.val());
+//         rb_hash_aset(ret, key, value);
+//     }
+
+//     return ret;
+// }
 
 RB_METHOD(mkxpParseCSV) {
     RB_UNUSED_PARAM;
