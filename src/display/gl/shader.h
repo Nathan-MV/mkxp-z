@@ -335,6 +335,15 @@ protected:
 	GLint u_sourceSize;
 };
 
+class BicubicShader : public Lanczos3Shader
+{
+public:
+	BicubicShader();
+
+protected:
+	GLint u_bc;
+};
+
 /* Global object containing all available shaders */
 struct ShaderSet
 {
@@ -356,6 +365,7 @@ struct ShaderSet
 	SimpleMatrixShader simpleMatrix;
 	BlurShader blur;
 	TilemapVXShader tilemapVX;
+	BicubicShader bicubic;
 	Lanczos3Shader lanczos3;
 };
 
