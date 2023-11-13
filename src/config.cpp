@@ -393,9 +393,6 @@ void Config::readGameINI() {
             }
         } else {
             Debug() << "Could not read" << iniFileName;
-            
-            // Set default values when the INI file is not found
-            rgssVersion = 3;
         }
     } catch (const std::exception& e) {
         // Handle the case when there is an error reading the INI file.
