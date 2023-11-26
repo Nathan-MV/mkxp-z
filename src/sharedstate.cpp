@@ -115,8 +115,11 @@ struct SharedStatePrivate
 
 		const char* metaPath = config.encryption.metaFile.c_str();
 
-		/* Check if a meta archive exists */
-		FILE *tmp = fopen(metaPath, "rb");
+		for (size_t i = 0; i < config.patches.size(); ++i)
+			fileSystem.addPath(config.patches[i].c_str());
+
+		/* Check if a game archive exists */
+		FILE *tmp = fopen(archPath.c_str(), "rb");
 		if (tmp)
 		{
 			fileSystem.initializeArchiveMetadata(metaPath, config);
