@@ -143,6 +143,7 @@ struct Config {
     struct {
         bool enabled;
     } prism;
+    bool dumpAtlas;
 
     // Keybinding action name mappings
     struct {

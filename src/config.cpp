@@ -191,6 +191,7 @@ void Config::read(int argc, char *argv[]) {
         {"YJITEnable", false},
         {"dumpAtlas", false},
         {"PrismEnable", false},
+        {"dumpAtlas", false},
         {"bindingNames", json::object({
             {"a", "A"},
             {"b", "B"},
