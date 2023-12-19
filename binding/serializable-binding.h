@@ -30,7 +30,9 @@ template<class C>
 static VALUE
 serializableDump(int, VALUE *, VALUE self)
 {
-	Serializable *s = getPrivateData<C>(self);
+	// In practice, this is always a Serializable except for Vec2 and Vec4. I had compilation issues trying to make
+	// those structs extend Serializable, so I'm making this concession for convenience.
+	C *s = getPrivateData<C>(self);
 
 	int dataSize = s->serialSize();
 
