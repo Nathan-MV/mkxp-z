@@ -135,6 +135,7 @@ void Config::read(int argc, char *argv[]) {
         {"fullscreen", false},
         {"fixedAspectRatio", true},
         {"smoothScaling", 0},
+        {"bicubicSharpness", 100},
         {"enableHires", false},
         {"textureScalingFactor", 1.},
         {"framebufferScalingFactor", 1.},
@@ -186,6 +187,7 @@ void Config::read(int argc, char *argv[]) {
         {"JITMaxCache", 100},
         {"JITMinCalls", 10000},
         {"YJITEnable", false},
+        {"dumpAtlas", false},
         {"bindingNames", json::object({
             {"a", "A"},
             {"b", "B"},
@@ -267,6 +269,7 @@ try { exp } catch (...) {}
     SET_OPT(fullscreen, boolean);
     SET_OPT(fixedAspectRatio, boolean);
     SET_OPT(smoothScaling, integer);
+    SET_OPT(bicubicSharpness, integer);
     SET_OPT(enableHires, boolean);
     SET_OPT(textureScalingFactor, number);
     SET_OPT(framebufferScalingFactor, number);
@@ -302,6 +305,7 @@ try { exp } catch (...) {}
     SET_STRINGOPT(encryption.password, password);
     SET_OPT_CUSTOMKEY(encryption.keyMultiplier, keyMultiplier, integer);
     SET_OPT_CUSTOMKEY(encryption.keyAdditive, keyAdditive, integer);
+    SET_OPT(dumpAtlas, boolean);
     
     fillStringVec(opts["preloadScript"], preloadScripts);
     fillStringVec(opts["RTP"], rtps);

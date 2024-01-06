@@ -133,7 +133,7 @@ bool EventThread::allocUserEvents()
 EventThread::EventThread()
 : ctrl(0),
 fullscreen(false),
-showCursor(true)
+showCursor(false)
 {
     textInputLock = SDL_CreateMutex();
 }
@@ -141,6 +141,20 @@ showCursor(true)
 EventThread::~EventThread()
 {
     SDL_DestroyMutex(textInputLock);
+}
+
+SDL_TimerID hideCursorTimerID = 0;
+Uint32 cursorTimerCallback(Uint32 interval, void* param)
+{
+	EventThread *ethread = static_cast<EventThread*>(param);
+	hideCursorTimerID = 0;
+	ethread->requestShowCursor(ethread->getShowCursor());
+	return 0;
+}
+void EventThread::cursorTimer()
+{
+	SDL_RemoveTimer(hideCursorTimerID);
+	hideCursorTimerID = SDL_AddTimer(500, cursorTimerCallback, this);
 }
 
 void EventThread::process(RGSSThreadData &rtData)
@@ -457,6 +471,7 @@ void EventThread::process(RGSSThreadData &rtData)
             case SDL_MOUSEMOTION :
                 mouseState.x = event.motion.x;
                 mouseState.y = event.motion.y;
+                cursorTimer();
                 updateCursorState(cursorInWindow, gameScreen);
                 lastInputDevice = LAST_INPUT_DEVICE_KBM;
                 break;
@@ -700,7 +715,7 @@ void EventThread::updateCursorState(bool inWindow,
     bool inScreen = inWindow && SDL_PointInRect(&pos, &screen);
     
     if (inScreen)
-        SDL_ShowCursor(showCursor ? SDL_TRUE : SDL_FALSE);
+        SDL_ShowCursor(showCursor || hideCursorTimerID ? SDL_TRUE : SDL_FALSE);
     else
         SDL_ShowCursor(SDL_TRUE);
 }
