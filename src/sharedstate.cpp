@@ -119,7 +119,7 @@ struct SharedStatePrivate
 			fileSystem.addPath(config.patches[i].c_str());
 
 		/* Check if a game archive exists */
-		FILE *tmp = fopen(archPath.c_str(), "rb");
+		FILE *tmp = fopen(metaPath.c_str(), "rb");
 		if (tmp)
 		{
 			fileSystem.initializeArchiveMetadata(metaPath, config);
