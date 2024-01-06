@@ -1,3 +1,4 @@
+#include "serializable-binding.h"
 #include "etc-binding-util.h"
 #include "etc-internal.h"
 #include "binding-util.h"
@@ -41,6 +42,9 @@ RB_METHOD(Vec4Stringify)
     return rb_sprintf("(%f, %f, %f, %f)", v->x, v->y, v->z, v->w);
 }
 
+MARSH_LOAD_FUN(Vec2);
+MARSH_LOAD_FUN(Vec4);
+
 INITCOPY_FUN(Vec2);
 INITCOPY_FUN(Vec4);
 
@@ -48,12 +52,12 @@ void etc_internalBindingInit()
 {
     VALUE klass;
 
-    INIT_BIND_SERIALIZELESS(Vec2);
+    INIT_BIND(Vec2);
 
     RB_ATTR_RW(Vec2, X, x);
     RB_ATTR_RW(Vec2, Y, y);
 
-    INIT_BIND_SERIALIZELESS(Vec4);
+    INIT_BIND(Vec4);
 
     RB_ATTR_RW(Vec4, X, x);
     RB_ATTR_RW(Vec4, Y, y);

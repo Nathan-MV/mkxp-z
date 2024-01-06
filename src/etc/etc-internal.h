@@ -23,6 +23,8 @@
 #define ETC_TYPES_H
 
 #include "util.h"
+#include "serial-util.h"
+#include "util/exception.h"
 
 #include <SDL_rect.h>
 
@@ -53,6 +55,23 @@ struct Vec2
 	{
 		this->x = x;
 		this->y = y;
+	}
+
+	int serialSize() {
+		return 4 * 4;
+	}
+
+	void serialize(char *buffer)
+	{
+		writeDouble(&buffer, x);
+		writeDouble(&buffer, y);
+	}
+
+	static Vec2* deserialize(const char *data, int len)
+	{
+		if (len != 16) throw Exception(Exception::ArgumentError, "Vec2: Serialized data invalid");
+
+		return new Vec2(readDouble(&data), readDouble(&data));
 	}
 };
 
@@ -94,6 +113,25 @@ struct Vec4
 		this->y = y;
 		this->z = z;
 		this->w = w;
+	}
+
+	int serialSize() {
+		return 4 * 8;
+	}
+
+	void serialize(char *buffer)
+	{
+		writeDouble(&buffer, x);
+		writeDouble(&buffer, y);
+		writeDouble(&buffer, z);
+		writeDouble(&buffer, w);
+	}
+
+	static Vec4* deserialize(const char *data, int len)
+	{
+		if (len != 32) throw Exception(Exception::ArgumentError, "Vec4: Serialized data invalid");
+
+		return new Vec4(readDouble(&data), readDouble(&data), readDouble(&data), readDouble(&data));
 	}
 };
 

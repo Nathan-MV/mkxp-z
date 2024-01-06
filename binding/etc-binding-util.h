@@ -128,20 +128,6 @@
 	_rb_define_method(klass, "inspect", Klass##Stringify); \
 }
 
-#define INIT_BIND_SERIALIZELESS(Klass) \
-{ \
-	klass = rb_define_class(#Klass, rb_cObject); \
-	rb_define_alloc_func(klass, classAllocate<&Klass##Type>); \
-	_rb_define_method(klass, "initialize", Klass##Initialize); \
-	_rb_define_method(klass, "initialize_copy", Klass##InitializeCopy); \
-	_rb_define_method(klass, "set", Klass##Set); \
-	_rb_define_method(klass, "==", Klass##Equal); \
-	_rb_define_method(klass, "===", Klass##Equal); \
-	_rb_define_method(klass, "eql?", Klass##Equal); \
-	_rb_define_method(klass, "to_s", Klass##Stringify); \
-	_rb_define_method(klass, "inspect", Klass##Stringify); \
-}
-
 #define MRB_ATTR_R(Class, attr)                                                \
   mrb_define_method(mrb, klass, #attr, Class##Get_##attr, MRB_ARGS_NONE())
 #define MRB_ATTR_W(Class, attr)                                                \
