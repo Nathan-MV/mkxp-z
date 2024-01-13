@@ -190,6 +190,7 @@ void Config::read(int argc, char *argv[]) {
         {"JITMinCalls", 10000},
         {"YJITEnable", false},
         {"dumpAtlas", false},
+        {"PrismEnable", false},
         {"bindingNames", json::object({
             {"a", "A"},
             {"b", "B"},
@@ -242,6 +243,7 @@ try { exp } catch (...) {}
     SET_OPT_CUSTOMKEY(jit.maxCache, JITMaxCache, integer);
     SET_OPT_CUSTOMKEY(jit.minCalls, JITMinCalls, integer);
     SET_OPT_CUSTOMKEY(yjit.enabled, YJITEnable, boolean);
+    SET_OPT_CUSTOMKEY(prism.enabled, PrismEnable, boolean);
     SET_OPT(rgssVersion, integer);
     SET_OPT(defScreenW, integer);
     SET_OPT(defScreenH, integer);

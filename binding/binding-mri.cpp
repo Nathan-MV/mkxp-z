@@ -1147,6 +1147,12 @@ static void mriBindingExecute() {
     } else {
         node = ruby_options(rubyArgsC.size(), const_cast<char**>(rubyArgsC.data()));
     }
+
+    // Execute Ruby with Prism parser option if enabled
+    if (conf.prism.enabled) {
+        rubyArgsC.push_back("--parser=prism");
+        node = ruby_options(rubyArgsC.size(), const_cast<char**>(rubyArgsC.data()));
+    }
     
     int state;
     bool valid = ruby_executable_node(node, &state);

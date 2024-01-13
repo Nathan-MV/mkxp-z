@@ -414,6 +414,13 @@
     //
     // "YJITEnable": false,
 
+    // Determines whether Prism parser is enabled.
+    // Only works with Ruby 3.3 or higher.
+    // This Ruby feature is experimental.
+    // (default: false)
+    //
+    // "PrismEnable": false,
+
     // SoundFont to use for midi playback (via fluidsynth)
     // (default: none)
     //

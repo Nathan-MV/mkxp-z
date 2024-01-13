@@ -139,6 +139,10 @@ struct Config {
     } yjit;
 
     bool dumpAtlas;
+    // Prism Options
+    struct {
+        bool enabled;
+    } prism;
 
     // Keybinding action name mappings
     struct {
