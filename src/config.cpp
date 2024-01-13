@@ -189,7 +189,6 @@ void Config::read(int argc, char *argv[]) {
         {"JITMaxCache", 100},
         {"JITMinCalls", 10000},
         {"YJITEnable", false},
-        {"dumpAtlas", false},
         {"PrismEnable", false},
         {"dumpAtlas", false},
         {"bindingNames", json::object({
