@@ -38,7 +38,7 @@ RUBY_CONFIGURE_ARGS := \
 	--disable-install-doc \
 	--with-out-ext=openssl,readline,dbm,gdbm,pty,syslog \
 	--with-static-linked-ext \
-	--enable-rubygems \
+	--disable-rubygems \
 	--without-gmp
 
 CONFIGURE := $(CONFIGURE_ENV) ./configure $(CONFIGURE_ARGS)
