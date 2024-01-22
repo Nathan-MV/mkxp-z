@@ -331,6 +331,11 @@
     //                   "scripts/preload/mkxp_wrap.rb",
     //                   "scripts/preload/win32_wrap.rb"],
 
+    // Define raw scripts to be executed before the 
+    // rgss_main execution starts
+    // (default: none)
+    //
+    // "pluginScript": ["/path/to/script.rb"],
 
     // Index all accesible assets via their lower case path
     // (emulates windows case insensitivity)
