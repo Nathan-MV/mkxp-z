@@ -109,7 +109,6 @@ struct Config {
     
     std::vector<std::string> launchArgs;
     std::vector<std::string> preloadScripts;
-    std::vector<std::string> pluginScripts;
     std::vector<std::string> rtps;
     std::vector<std::string> patches;
     

@@ -181,7 +181,6 @@ void Config::read(int argc, char *argv[]) {
         {"pathCache", true},
         {"useScriptNames", true},
         {"preloadScript", json::array({})},
-        {"pluginScript", json::array({})},
         {"RTP", json::array({})},
         {"patches", json::array({})},
         {"fontSub", json::array({})},
@@ -307,7 +306,6 @@ try { exp } catch (...) {}
     SET_OPT(dumpAtlas, boolean);
     
     fillStringVec(opts["preloadScript"], preloadScripts);
-    fillStringVec(opts["pluginScript"], pluginScripts);
     fillStringVec(opts["RTP"], rtps);
     fillStringVec(opts["patches"], patches);
     fillStringVec(opts["fontSub"], fontSubs);
