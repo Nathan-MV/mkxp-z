@@ -66,8 +66,8 @@
 #include <climits>
 
 
-#define DEF_SCREEN_W 640
-#define DEF_SCREEN_H 360
+#define DEF_SCREEN_W (rgssVer == 1 ? 640 : 544)
+#define DEF_SCREEN_H (rgssVer == 1 ? 480 : 416)
 
 #define DEF_FRAMERATE (rgssVer == 1 ? 40 : 60)
 
@@ -1678,7 +1678,7 @@ double Graphics::getScale() const {
 
 void Graphics::setScale(double factor) {
     p->threadData->rqWindowAdjust.wait();
-    factor = clamp(factor, 0.5, 16.0);
+    factor = clamp(factor, 0.5, 4.0);
     
     if (factor == getScale())
         return;
