@@ -486,6 +486,12 @@
     // }
 
 
+    // Use RGSS1 Tilemap with RGSS2/3
+    // (default: false)
+    //
+    // "tilemapXP": false,
+
+
     // Dump tile atlas (for debugging purposes)
     // (default: false)
     //

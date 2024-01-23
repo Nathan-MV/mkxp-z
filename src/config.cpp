@@ -192,6 +192,7 @@ void Config::read(int argc, char *argv[]) {
         {"JITMinCalls", 10000},
         {"YJITEnable", false},
         {"PrismEnable", false},
+        {"tilemapXP", false},
         {"dumpAtlas", false},
         {"bindingNames", json::object({
             {"a", "A"},
@@ -304,6 +305,7 @@ try { exp } catch (...) {}
     SET_OPT_CUSTOMKEY(BGM.trackCount, BGMTrackCount, integer);
     SET_STRINGOPT(customScript, customScript);
     SET_OPT(useScriptNames, boolean);
+    SET_OPT(tilemapXP, boolean);
     SET_OPT(dumpAtlas, boolean);
     
     fillStringVec(opts["preloadScript"], preloadScripts);

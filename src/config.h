@@ -147,6 +147,7 @@ struct Config {
         bool enabled;
     } prism;
 
+    bool tilemapXP;
     bool dumpAtlas;
 
     // Keybinding action name mappings

@@ -169,7 +169,11 @@ static void mriBindingInit() {
         tilemapBindingInit();
     } else {
         windowVXBindingInit();
-        tilemapVXBindingInit();
+        if (shState->config().tilemapXP) {
+            tilemapBindingInit();
+        } else {
+            tilemapVXBindingInit();
+        }
     }
     
     inputBindingInit();
