@@ -36,8 +36,8 @@ struct Config {
     
     bool debugMode;
     bool winConsole;
+    bool preferMetalRenderer;
     bool displayFPS;
-    std::string angleRenderer;
     bool printFPS;
     
     bool winResizable;
