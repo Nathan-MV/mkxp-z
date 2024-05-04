@@ -320,9 +320,6 @@ $(LIBDIR)/libruby.so.3.3: $(DOWNLOADS)/ruby/Makefile
 
 $(DOWNLOADS)/ruby/Makefile: $(DOWNLOADS)/ruby/configure
 	cd $(DOWNLOADS)/ruby; \
-	export $(CONFIGURE_ENV); \
-	export CFLAGS="$$CFLAGS"; \
-	export LDFLAGS="$$LDFLAGS"; \
 	./configure $(CONFIGURE_ARGS) $(RUBY_CONFIGURE_ARGS) $(RUBY_FLAGS)
 
 $(DOWNLOADS)/ruby/configure: $(DOWNLOADS)/ruby/configure.ac
