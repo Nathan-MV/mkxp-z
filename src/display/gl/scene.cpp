@@ -21,6 +21,8 @@
 
 #include "scene.h"
 #include "sharedstate.h"
+#include "config.h"
+#include "sharedstate.h"
 
 Scene::Scene()
 {}
@@ -191,9 +193,10 @@ bool SceneElement::operator<(const SceneElement &o) const
 
 void SceneElement::setSpriteY(int value)
 {
-	spriteY = value;
-	if (rgssVer >= 2)
-		scene->reinsert(*this);
+    spriteY = value;
+    if (rgssVer != 1 || (rgssVer > 1 && shState->config().tilemapVersion != 1)) {
+        scene->reinsert(*this);
+    }
 }
 
 void SceneElement::unlink()
