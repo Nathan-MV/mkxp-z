@@ -367,7 +367,7 @@ $(DOWNLOADS)/ruby/configure: $(DOWNLOADS)/ruby/configure.ac
 	cd $(DOWNLOADS)/ruby; autoreconf -i
 
 $(DOWNLOADS)/ruby/configure.ac:
-	$(CLONE) $(GITHUB)/mkxp-z/ruby $(DOWNLOADS)/ruby --single-branch --branch mkxp-z-3.3.5 --depth 1;
+	$(CLONE) $(GITHUB)/ruby/ruby $(DOWNLOADS)/ruby --single-branch --branch ruby_3_3 --depth 1;
 
 # ====
 init_dirs:
