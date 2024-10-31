@@ -15,8 +15,8 @@ LIBDIR := $(BUILD_PREFIX)/lib
 INCLUDEDIR := $(BUILD_PREFIX)/include
 DOWNLOADS := ${PWD}/downloads/$(ARCH)
 NPROC := $(shell nproc)
-CFLAGS := -I$(INCLUDEDIR) -flax-vector-conversions -O3 $(ARCH_CFLAGS)
-LDFLAGS := -L$(LIBDIR)
+CFLAGS := -I$(INCLUDEDIR) -flax-vector-conversions -Ofast $(ARCH_CFLAGS)
+LDFLAGS := -L$(LIBDIR) -Wl,-Ofast,-flto=full
 CC      ?= gcc
 PKG_CONFIG_LIBDIR := $(BUILD_PREFIX)/lib/pkgconfig
 GIT := git
@@ -359,8 +359,8 @@ $(LIBDIR)/libruby.so.3.3: $(DOWNLOADS)/ruby/Makefile
 $(DOWNLOADS)/ruby/Makefile: $(DOWNLOADS)/ruby/configure
 	cd $(DOWNLOADS)/ruby; \
 	export $(CONFIGURE_ENV); \
-	export CFLAGS="-flto $$CFLAGS"; \
-	export LDFLAGS="-flto $$LDFLAGS"; \
+	export CFLAGS="$$CFLAGS"; \
+	export LDFLAGS="$$LDFLAGS"; \
 	./configure $(CONFIGURE_ARGS) $(RUBY_CONFIGURE_ARGS) $(RUBY_FLAGS)
 
 $(DOWNLOADS)/ruby/configure: $(DOWNLOADS)/ruby/configure.ac
