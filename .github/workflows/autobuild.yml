@@ -36,9 +36,9 @@ jobs:
 
 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: |
             windows/build-mingw64
@@ -79,7 +79,7 @@ jobs:
           # https://github.com/actions/upload-artifact/issues/426
           zip -r artifact.zip artifact
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: mkxp-z.windows.${{github.event_name == 'pull_request' && format('PR{0}', github.event.number) || github.ref_name}}-${{steps.short-sha.outputs.sha}}
           path: build/artifact.zip
@@ -94,9 +94,9 @@ jobs:
           length: 7
 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: |
             linux/build-x86_64
@@ -135,7 +135,7 @@ jobs:
           # https://github.com/actions/upload-artifact/issues/426
           zip -r local.zip local
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: mkxp-z.linux.x86_64.${{github.event_name == 'pull_request' && format('PR{0}', github.event.number) || github.ref_name}}-${{steps.short-sha.outputs.sha}}
           path: build/local.zip
@@ -190,9 +190,9 @@ jobs:
           length: 7
 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: |
             linux/build-${{matrix.arch_mkxpz}}
@@ -243,7 +243,7 @@ jobs:
           cd ..
           zip -r local.zip local
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: mkxp-z.linux.${{matrix.arch_mkxpz}}.${{github.event_name == 'pull_request' && format('PR{0}', github.event.number) || github.ref_name}}-${{steps.short-sha.outputs.sha}}
           path: build/local.zip
@@ -261,9 +261,9 @@ jobs:
         run: brew remove --force $(brew list)
 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: |
             macos/Dependencies/build-macosx-x86_64
@@ -294,7 +294,7 @@ jobs:
           ditto -c -k --sequesterRsrc --keepParent Z-universal.app Z-universal.app.zip
 
       - name: Upload archive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: mkxp-z.macos.${{github.event_name == 'pull_request' && format('PR{0}', github.event.number) || github.ref_name}}-${{steps.short-sha.outputs.sha}}
           path: build/Build/Products/Release/Z-universal.app.zip
