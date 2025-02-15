@@ -16,7 +16,7 @@ INCLUDEDIR := $(BUILD_PREFIX)/include
 DOWNLOADS := ${PWD}/downloads/$(ARCH)
 NPROC := $(shell nproc)
 CFLAGS := -I$(INCLUDEDIR) -flax-vector-conversions -Ofast $(ARCH_CFLAGS)
-LDFLAGS := -L$(LIBDIR) -Wl,-Ofast,-flto=full
+LDFLAGS := -L$(LIBDIR) -Wl,-Ofast
 CC      ?= gcc
 PKG_CONFIG_LIBDIR := $(BUILD_PREFIX)/lib/pkgconfig
 GIT := git
